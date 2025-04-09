@@ -21,8 +21,8 @@ export default async function handler(
   }
 
   try {
-    // Create tmp directory if it doesn't exist
-    const uploadDir = path.join(process.cwd(), 'tmp');
+    // Use the writable /tmp directory on Vercel instead of process.cwd()
+    const uploadDir = path.join('/tmp', 'document-analyzer');
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
@@ -124,7 +124,6 @@ async function runPythonScript(filePath: string, namingConvention: string): Prom
         reject(new Error(`Python script exited with code ${code}: ${stdErr}`));
         return;
       }
-
       resolve({
         extractedInfo,
         newFilename,
