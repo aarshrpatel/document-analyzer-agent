@@ -1,6 +1,6 @@
 {
     "functions": {
-      "api/process-document.ts": {
+      "pages/api/process-document.ts": {
         "runtime": "@vercel/node@1.15.1",
         "includeFiles": "scripts/**"
       }
