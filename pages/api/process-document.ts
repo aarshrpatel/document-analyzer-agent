@@ -30,13 +30,13 @@ export default async function handler(
   }
 
   try {
-    // Use the writable /tmp directory on Vercel instead of process.cwd()
+    // Use the writable /tmp directory on Vercel
     const uploadDir = path.join('/tmp', 'document-analyzer');
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
 
-    // Parse form with uploaded file - updated for newer formidable versions
+    // Parse form with uploaded file
     const form = formidable({
       uploadDir,
       keepExtensions: true,
@@ -100,8 +100,8 @@ async function runPythonScript(filePath: string, namingConvention: string): Prom
     // Path to the Python script
     const scriptPath = path.join(process.cwd(), 'scripts', 'document_analyzer.py');
 
-    // Run the Python script as a child process
-    const pythonProcess = spawn('python', [scriptPath, filePath, namingConvention]);
+    // Use 'python3' instead of 'python'
+    const pythonProcess = spawn('python3', [scriptPath, filePath, namingConvention]);
 
     let extractedInfo = '';
     let stdErr = '';
@@ -109,7 +109,7 @@ async function runPythonScript(filePath: string, namingConvention: string): Prom
 
     pythonProcess.stdout.on('data', (data) => {
       const output = data.toString();
-      
+
       // Parse output for extracted info and new filename
       if (output.includes('Extracted information:')) {
         extractedInfo = output.split('Extracted information:')[1].split('Generated new filename:')[0].trim();
