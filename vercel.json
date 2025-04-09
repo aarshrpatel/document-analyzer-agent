@@ -1,0 +1,11 @@
+{
+    "functions": {
+      "api/process-document.ts": {
+        "runtime": "nodejs20.x",
+        "includeFiles": [
+          "scripts/**"
+        ]
+      }
+    }
+  }
+s  
