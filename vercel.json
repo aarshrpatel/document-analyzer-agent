@@ -1,7 +1,7 @@
 {
     "functions": {
       "api/process-document.ts": {
-        "runtime": "nodejs20.x",
+        "runtime": "@vercel/node@1.15.1",
         "includeFiles": "scripts/**"
       }
     }
